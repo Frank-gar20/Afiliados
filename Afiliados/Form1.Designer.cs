@@ -92,7 +92,7 @@
             // 
             // txtEstado
             // 
-            this.txtEstado.Location = new System.Drawing.Point(131, 91);
+            this.txtEstado.Location = new System.Drawing.Point(131, 90);
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.Size = new System.Drawing.Size(108, 20);
             this.txtEstado.TabIndex = 5;
