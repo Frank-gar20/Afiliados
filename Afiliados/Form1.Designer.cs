@@ -31,8 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblFechaInicio = new System.Windows.Forms.Label();
+            this.lblFechaFin = new System.Windows.Forms.Label();
             this.txtEstado = new System.Windows.Forms.TextBox();
             this.txtAfiliados = new System.Windows.Forms.TextBox();
             this.cbMunicipio = new System.Windows.Forms.ComboBox();
@@ -52,6 +52,7 @@
             this.Fecha_Afiliacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
+            this.chbFecha = new System.Windows.Forms.CheckBox();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInformacion)).BeginInit();
             this.SuspendLayout();
@@ -86,38 +87,45 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Cantidad de Afiliados:";
             // 
-            // label4
+            // lblFechaInicio
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(48, 411);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 24);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Fecha Inicio";
+            this.lblFechaInicio.AutoSize = true;
+            this.lblFechaInicio.Enabled = false;
+            this.lblFechaInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaInicio.Location = new System.Drawing.Point(59, 444);
+            this.lblFechaInicio.Name = "lblFechaInicio";
+            this.lblFechaInicio.Size = new System.Drawing.Size(113, 24);
+            this.lblFechaInicio.TabIndex = 3;
+            this.lblFechaInicio.Text = "Fecha Inicio";
             // 
-            // label5
+            // lblFechaFin
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(356, 413);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 24);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Fecha Fin";
+            this.lblFechaFin.AutoSize = true;
+            this.lblFechaFin.Enabled = false;
+            this.lblFechaFin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaFin.Location = new System.Drawing.Point(359, 446);
+            this.lblFechaFin.Name = "lblFechaFin";
+            this.lblFechaFin.Size = new System.Drawing.Size(96, 24);
+            this.lblFechaFin.TabIndex = 4;
+            this.lblFechaFin.Text = "Fecha Fin";
+            this.lblFechaFin.Click += new System.EventHandler(this.label5_Click);
             // 
             // txtEstado
             // 
+            this.txtEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEstado.Location = new System.Drawing.Point(131, 54);
             this.txtEstado.Name = "txtEstado";
-            this.txtEstado.Size = new System.Drawing.Size(108, 20);
+            this.txtEstado.ReadOnly = true;
+            this.txtEstado.Size = new System.Drawing.Size(108, 22);
             this.txtEstado.TabIndex = 5;
             // 
             // txtAfiliados
             // 
+            this.txtAfiliados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAfiliados.Location = new System.Drawing.Point(245, 356);
             this.txtAfiliados.Name = "txtAfiliados";
-            this.txtAfiliados.Size = new System.Drawing.Size(66, 20);
+            this.txtAfiliados.ReadOnly = true;
+            this.txtAfiliados.Size = new System.Drawing.Size(86, 22);
             this.txtAfiliados.TabIndex = 6;
             // 
             // cbMunicipio
@@ -127,19 +135,24 @@
             this.cbMunicipio.Name = "cbMunicipio";
             this.cbMunicipio.Size = new System.Drawing.Size(121, 21);
             this.cbMunicipio.TabIndex = 7;
+            this.cbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cbMunicipio_SelectedIndexChanged);
             // 
             // dtpInicio
             // 
-            this.dtpInicio.Location = new System.Drawing.Point(12, 444);
+            this.dtpInicio.Enabled = false;
+            this.dtpInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpInicio.Location = new System.Drawing.Point(10, 477);
             this.dtpInicio.Name = "dtpInicio";
-            this.dtpInicio.Size = new System.Drawing.Size(200, 20);
+            this.dtpInicio.Size = new System.Drawing.Size(240, 22);
             this.dtpInicio.TabIndex = 8;
             // 
             // dtpfin
             // 
-            this.dtpfin.Location = new System.Drawing.Point(298, 444);
+            this.dtpfin.Enabled = false;
+            this.dtpfin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpfin.Location = new System.Drawing.Point(296, 477);
             this.dtpfin.Name = "dtpfin";
-            this.dtpfin.Size = new System.Drawing.Size(200, 20);
+            this.dtpfin.Size = new System.Drawing.Size(242, 22);
             this.dtpfin.TabIndex = 9;
             // 
             // msMenu
@@ -239,20 +252,34 @@
             // ofdAbrir
             // 
             this.ofdAbrir.FileName = "openFileDialog1";
+            this.ofdAbrir.Filter = "Archivo de Excel|*.xlsx";
+            // 
+            // chbFecha
+            // 
+            this.chbFecha.AutoSize = true;
+            this.chbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbFecha.Location = new System.Drawing.Point(194, 405);
+            this.chbFecha.Name = "chbFecha";
+            this.chbFecha.Size = new System.Drawing.Size(155, 28);
+            this.chbFecha.TabIndex = 12;
+            this.chbFecha.Text = "Habilitar Fecha";
+            this.chbFecha.UseVisualStyleBackColor = true;
+            this.chbFecha.CheckedChanged += new System.EventHandler(this.chbFecha_CheckedChanged);
             // 
             // FRMafiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 508);
+            this.ClientSize = new System.Drawing.Size(745, 516);
+            this.Controls.Add(this.chbFecha);
             this.Controls.Add(this.dgvInformacion);
             this.Controls.Add(this.dtpfin);
             this.Controls.Add(this.dtpInicio);
             this.Controls.Add(this.cbMunicipio);
             this.Controls.Add(this.txtAfiliados);
             this.Controls.Add(this.txtEstado);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblFechaFin);
+            this.Controls.Add(this.lblFechaInicio);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -274,8 +301,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblFechaInicio;
+        private System.Windows.Forms.Label lblFechaFin;
         private System.Windows.Forms.TextBox txtEstado;
         private System.Windows.Forms.TextBox txtAfiliados;
         private System.Windows.Forms.ComboBox cbMunicipio;
@@ -295,6 +322,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Afiliacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
         private System.Windows.Forms.OpenFileDialog ofdAbrir;
+        private System.Windows.Forms.CheckBox chbFecha;
     }
 }
 
