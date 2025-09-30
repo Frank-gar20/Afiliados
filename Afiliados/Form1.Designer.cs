@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,17 +51,19 @@
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvInformacion = new System.Windows.Forms.DataGridView();
+            this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
+            this.chbFecha = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtArchivo = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtBusquedaAfi = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Municipio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_Afiliacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
-            this.chbFecha = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtArchivo = new System.Windows.Forms.TextBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInformacion)).BeginInit();
             this.SuspendLayout();
@@ -63,26 +71,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(48, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 24);
+            this.label1.Size = new System.Drawing.Size(66, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "Estado:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(48, 102);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 24);
+            this.label2.Size = new System.Drawing.Size(89, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "Municipio:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(48, 352);
             this.label3.Name = "label3";
@@ -119,7 +128,7 @@
             this.txtEstado.Location = new System.Drawing.Point(131, 54);
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.ReadOnly = true;
-            this.txtEstado.Size = new System.Drawing.Size(108, 22);
+            this.txtEstado.Size = new System.Drawing.Size(141, 22);
             this.txtEstado.TabIndex = 5;
             // 
             // txtAfiliados
@@ -160,12 +169,13 @@
             // 
             // msMenu
             // 
+            this.msMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.opcionesToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(745, 24);
+            this.msMenu.Size = new System.Drawing.Size(745, 29);
             this.msMenu.TabIndex = 10;
             this.msMenu.Text = "msMenu";
             // 
@@ -174,13 +184,13 @@
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(75, 25);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -190,20 +200,20 @@
             this.importarToolStripMenuItem,
             this.limpiarToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.opcionesToolStripMenuItem.Text = "Opciones";
             // 
             // importarToolStripMenuItem
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.importarToolStripMenuItem.Text = "Importar";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // limpiarToolStripMenuItem
             // 
             this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
-            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.limpiarToolStripMenuItem.Text = "Limpiar";
             this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.reiniToolStripMenuItem_Click);
             // 
@@ -222,37 +232,6 @@
             this.dgvInformacion.Size = new System.Drawing.Size(746, 150);
             this.dgvInformacion.TabIndex = 11;
             // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            // 
-            // Entidad
-            // 
-            this.Entidad.HeaderText = "Entidad";
-            this.Entidad.Name = "Entidad";
-            // 
-            // Municipio
-            // 
-            this.Municipio.HeaderText = "Municipio";
-            this.Municipio.Name = "Municipio";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 200;
-            // 
-            // Fecha_Afiliacion
-            // 
-            this.Fecha_Afiliacion.HeaderText = "Fecha de Afiliacion";
-            this.Fecha_Afiliacion.Name = "Fecha_Afiliacion";
-            // 
-            // Estatus
-            // 
-            this.Estatus.HeaderText = "Estatus";
-            this.Estatus.Name = "Estatus";
-            // 
             // ofdAbrir
             // 
             this.ofdAbrir.FileName = "openFileDialog1";
@@ -261,10 +240,10 @@
             // chbFecha
             // 
             this.chbFecha.AutoSize = true;
-            this.chbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbFecha.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbFecha.Location = new System.Drawing.Point(194, 405);
             this.chbFecha.Name = "chbFecha";
-            this.chbFecha.Size = new System.Drawing.Size(155, 28);
+            this.chbFecha.Size = new System.Drawing.Size(161, 28);
             this.chbFecha.TabIndex = 12;
             this.chbFecha.Text = "Habilitar Fecha";
             this.chbFecha.UseVisualStyleBackColor = true;
@@ -273,10 +252,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(341, 54);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 24);
+            this.label4.Size = new System.Drawing.Size(74, 21);
             this.label4.TabIndex = 13;
             this.label4.Text = "Archivo:";
             // 
@@ -286,7 +265,7 @@
             this.txtArchivo.Location = new System.Drawing.Point(426, 57);
             this.txtArchivo.Name = "txtArchivo";
             this.txtArchivo.ReadOnly = true;
-            this.txtArchivo.Size = new System.Drawing.Size(160, 22);
+            this.txtArchivo.Size = new System.Drawing.Size(174, 22);
             this.txtArchivo.TabIndex = 14;
             // 
             // btnBuscar
@@ -301,11 +280,82 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // txtBusquedaAfi
+            // 
+            this.txtBusquedaAfi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBusquedaAfi.Location = new System.Drawing.Point(470, 110);
+            this.txtBusquedaAfi.Name = "txtBusquedaAfi";
+            this.txtBusquedaAfi.Size = new System.Drawing.Size(160, 22);
+            this.txtBusquedaAfi.TabIndex = 16;
+            this.txtBusquedaAfi.TextChanged += new System.EventHandler(this.txtBusquedaAfi_TextChanged);
+            this.txtBusquedaAfi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBusquedaAfi_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(341, 107);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(112, 21);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Busqueda ID:";
+            // 
+            // id
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id.DefaultCellStyle = dataGridViewCellStyle1;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            // 
+            // Entidad
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Entidad.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Entidad.HeaderText = "Entidad";
+            this.Entidad.Name = "Entidad";
+            // 
+            // Municipio
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Municipio.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Municipio.HeaderText = "Municipio";
+            this.Municipio.Name = "Municipio";
+            // 
+            // Nombre
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 200;
+            // 
+            // Fecha_Afiliacion
+            // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fecha_Afiliacion.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Fecha_Afiliacion.HeaderText = "Fecha de Afiliacion";
+            this.Fecha_Afiliacion.Name = "Fecha_Afiliacion";
+            // 
+            // Estatus
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Estatus.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Estatus.HeaderText = "Estatus";
+            this.Estatus.Name = "Estatus";
+            // 
             // FRMafiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 516);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtBusquedaAfi);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtArchivo);
             this.Controls.Add(this.label4);
@@ -353,17 +403,19 @@
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem limpiarToolStripMenuItem;
         private System.Windows.Forms.DataGridView dgvInformacion;
+        private System.Windows.Forms.OpenFileDialog ofdAbrir;
+        private System.Windows.Forms.CheckBox chbFecha;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtArchivo;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.TextBox txtBusquedaAfi;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Entidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Municipio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Afiliacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
-        private System.Windows.Forms.OpenFileDialog ofdAbrir;
-        private System.Windows.Forms.CheckBox chbFecha;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtArchivo;
-        private System.Windows.Forms.Button btnBuscar;
     }
 }
 
