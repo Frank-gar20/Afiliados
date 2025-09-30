@@ -43,7 +43,7 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvInformacion = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +53,8 @@
             this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
             this.chbFecha = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtArchivo = new System.Windows.Forms.TextBox();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInformacion)).BeginInit();
             this.SuspendLayout();
@@ -185,7 +187,7 @@
             // 
             this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importarToolStripMenuItem,
-            this.reiniToolStripMenuItem});
+            this.limpiarToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesToolStripMenuItem.Text = "Opciones";
@@ -197,11 +199,12 @@
             this.importarToolStripMenuItem.Text = "Importar";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
-            // reiniToolStripMenuItem
+            // limpiarToolStripMenuItem
             // 
-            this.reiniToolStripMenuItem.Name = "reiniToolStripMenuItem";
-            this.reiniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reiniToolStripMenuItem.Text = "Reiniciar";
+            this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limpiarToolStripMenuItem.Text = "Limpiar";
+            this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.reiniToolStripMenuItem_Click);
             // 
             // dgvInformacion
             // 
@@ -266,11 +269,32 @@
             this.chbFecha.UseVisualStyleBackColor = true;
             this.chbFecha.CheckedChanged += new System.EventHandler(this.chbFecha_CheckedChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(341, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 24);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Archivo:";
+            // 
+            // txtArchivo
+            // 
+            this.txtArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtArchivo.Location = new System.Drawing.Point(426, 57);
+            this.txtArchivo.Name = "txtArchivo";
+            this.txtArchivo.ReadOnly = true;
+            this.txtArchivo.Size = new System.Drawing.Size(160, 22);
+            this.txtArchivo.TabIndex = 14;
+            // 
             // FRMafiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 516);
+            this.Controls.Add(this.txtArchivo);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.chbFecha);
             this.Controls.Add(this.dgvInformacion);
             this.Controls.Add(this.dtpfin);
@@ -313,7 +337,7 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opcionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reiniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem limpiarToolStripMenuItem;
         private System.Windows.Forms.DataGridView dgvInformacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Entidad;
@@ -323,6 +347,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
         private System.Windows.Forms.OpenFileDialog ofdAbrir;
         private System.Windows.Forms.CheckBox chbFecha;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtArchivo;
     }
 }
 

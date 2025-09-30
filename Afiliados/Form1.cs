@@ -14,14 +14,19 @@ namespace Afiliados
     public partial class FRMafiliados : Form
     {
         List<string> columnas;
-        private List<object[]> todasFilas = new List<object[]>();
-        public int afiliados = 1;
+        public int afiliados = 0;
         DataTable dt;
-        HashSet<String> municipios;
+        HashSet<String> municipios;//usamos hashset para una busqueda rapida y eliminar duplicados
         public FRMafiliados()
         {
             InitializeComponent();
-            columnas = new List<string> { "ID", "Entidad", "Municipio", "Nombre", "Fecha de afiliacion", "Estatus" };
+            columnas = new List<string> { 
+                "ID", 
+                "Entidad", 
+                "Municipio", 
+                "Nombre", 
+                "Fecha de afiliacion", 
+                "Estatus" };
             municipios = new HashSet<string>();
             dt = new DataTable();
             foreach (var col in columnas)
@@ -29,7 +34,6 @@ namespace Afiliados
                 dt.Columns.Add(col);
             }
             cbMunicipio.SelectedIndexChanged += cbMunicipio_SelectedIndexChanged;
-
         }
 
         private void FRMafiliados_Load(object sender, EventArgs e)
@@ -113,6 +117,7 @@ namespace Afiliados
                     {
                         txtAfiliados.Text = afiliados.ToString();
                         txtEstado.Text = dgvInformacion.Rows[0].Cells[1].Value.ToString();
+                        txtArchivo.Text = ofdAbrir.SafeFileName;
                     });
                 }
             }
@@ -137,39 +142,40 @@ namespace Afiliados
 
         private void cbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbMunicipio.SelectedItem == null)
-                return;
+            if (cbMunicipio.SelectedItem == null) return;
 
-            string municipio = cbMunicipio.SelectedItem.ToString();
+            string seleccion = cbMunicipio.SelectedItem.ToString();
 
-            IEnumerable<object[]> filtradas;
-
-            if (municipio == "TODOS")
+            if (seleccion == "TODOS")
             {
-                filtradas = todasFilas;
+                dgvInformacion.DataSource = dt;
             }
-            else if (municipio == "NINGUNO")
+            else if (seleccion == "NINGUNO")
             {
-                // los que no tienen municipio
-                filtradas = todasFilas.Where(f => string.IsNullOrWhiteSpace(f[2]?.ToString()));
+                DataView dv = new DataView(dt);
+                dv.RowFilter = "Municipio = ''";
+                dgvInformacion.DataSource = dv;
             }
             else
-                filtradas = todasFilas.Where(f => (f[2]?.ToString() ?? "") == municipio);
-
-            CargarFilas(filtradas.ToList());
-            txtAfiliados.Text = filtradas.Count().ToString();
-        }
-
-        private void CargarFilas(List<object[]> filtradas)
-        {
-            dgvInformacion.SuspendLayout();
-            dgvInformacion.Rows.Clear();
-            foreach (var fila in filtradas)
             {
-                dgvInformacion.Rows.Add(fila);
+                DataView dv = new DataView(dt);
+                dv.RowFilter = $"Municipio = '{seleccion}'"; // usamos filtro para "leer" la columna
+                dgvInformacion.DataSource = dv;
             }
-            dgvInformacion.ResumeLayout();
+            txtAfiliados.Text = dgvInformacion.Rows.Count.ToString();
         }
 
+        private void reiniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtEstado.Text = string.Empty;
+            txtArchivo.Text = string.Empty;
+            txtAfiliados.Text = string.Empty;
+            chbFecha.Checked = false;
+            municipios.Clear();
+            cbMunicipio.DataSource = municipios.ToList();
+            cbMunicipio.Text = string.Empty;
+            
+            dt.Clear();
+        }
     }
 }
