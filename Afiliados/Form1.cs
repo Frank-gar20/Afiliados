@@ -1,9 +1,9 @@
 ﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +15,21 @@ namespace Afiliados
     {
         List<string> columnas;
         private List<object[]> todasFilas = new List<object[]>();
+        public int afiliados = 1;
+        DataTable dt;
+        HashSet<String> municipios;
         public FRMafiliados()
         {
             InitializeComponent();
-            columnas = new List<string>();
-
+            columnas = new List<string> { "ID", "Entidad", "Municipio", "Nombre", "Fecha de afiliacion", "Estatus" };
+            municipios = new HashSet<string>();
+            dt = new DataTable();
+            foreach (var col in columnas)
+            {
+                dt.Columns.Add(col);
+            }
             cbMunicipio.SelectedIndexChanged += cbMunicipio_SelectedIndexChanged;
+
         }
 
         private void FRMafiliados_Load(object sender, EventArgs e)
@@ -42,101 +51,76 @@ namespace Afiliados
             }
         }
 
-        private async void CargarExcel(string path)
+        private void CargarExcel(String path)
         {
+            afiliados = 1;
+            ExcelPackage.License.SetNonCommercialPersonal("Francisco Garcia");
             try
             {
-                ExcelPackage.License.SetNonCommercialPersonal("Jose Franscisco Garcia Lopez");
-
-                // Lista temporal
-                List<object[]> filas = new List<object[]>();
-                HashSet<string> municipios = new HashSet<string>();
-                string entidaduno = "";
-
-                //usamos un hilo secundario
-                await Task.Run(() =>
+                using (var package = new ExcelPackage(new System.IO.FileInfo(path)))
                 {
-                    using (var package = new ExcelPackage(new System.IO.FileInfo(path)))
+                    if (package.Workbook.Worksheets.Count == 0)
                     {
-                        if (package.Workbook.Worksheets.Count == 0)
-                        {
-                            MessageBox.Show("El archivo no contiene hojas de trabajo.");//por si no hay hojas
-                            return;
-                        }
-
-                        ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                        int rowCount = worksheet.Dimension.End.Row;
-
-                        // lee un rango completo
-                        object[,] values = worksheet.Cells[2, 1, rowCount, 6].Value as object[,];
-
-                        int rows = values.GetLength(0); // cantidad filas
-
-                        for (int i = 0; i < rows; i++)
-                        {
-                            string id = values[i, 0]?.ToString() ?? "";
-                            if (!string.IsNullOrWhiteSpace(id))
-                            {
-                                //evitamos llamadas innescesarias del .text()
-                                string entidad = values[i, 1]?.ToString() ?? "";
-                                string municipio = values[i, 2]?.ToString() ?? "";
-                                string nombre = values[i, 3]?.ToString() ?? "";
-                                string fecha_af = values[i, 4]?.ToString() ?? "";
-                                string estatus = values[i, 5]?.ToString() ?? "";
-
-                                filas.Add(new object[] { id, entidad, municipio, nombre, fecha_af, estatus });
-
-                                //agregamos el estado solo la primera vuelta
-                                if (string.IsNullOrWhiteSpace(entidaduno) && !string.IsNullOrWhiteSpace(entidad))
-                                {
-                                    entidaduno = entidad;
-                                }
-
-                                //leemos los municipios del excel; con el hashset ignora los elementos repetidos
-                                if (!string.IsNullOrWhiteSpace(municipio))
-                                {
-                                    municipios.Add(municipio);
-                                }
-                            }
-                        }
+                        MessageBox.Show("El archivo de Excel no contiene hojas de trabajo.");
+                        return;//por si no hay hojas
                     }
-                });
 
-                todasFilas = filas;
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
-                //aqui cargamos el combo box (ya en el primer hilo)
-                cbMunicipio.Items.Clear();
-                cbMunicipio.Items.Add("TODOS");
-                cbMunicipio.Items.Add("NINGUNO");
-                foreach (var m in municipios.OrderBy(x => x))
-                {
-                    cbMunicipio.Items.Add(m);
-                }
-                cbMunicipio.SelectedIndex = 0; //forzamos a que se muestren todos la primera vez
+                    int rowCount = 0;
+                    for (int i = 2; i < worksheet.Dimension.End.Row; i++)
+                    {
+                        rowCount = rowCount + 1;
+                        afiliados++;
+                    }
+                    rowCount = rowCount + 3;
+                    for (int i = 2; i < rowCount; i++)
+                    {
+                        DataRow row = dt.NewRow();
+                        municipios.Add("TODOS");
+                        string muni = worksheet.Cells[i, 3].Text;
+                        if (!string.IsNullOrEmpty(muni))
+                        {
+                            municipios.Add(muni);
+                        }
+                        else
+                        {
+                            municipios.Add("NINGUNO");
+                        }
 
-                //suspend cancela que se actualize cada vez
-                dgvInformacion.SuspendLayout();
-                dgvInformacion.Rows.Clear();
-                foreach (var fila in filas)
-                {
-                    dgvInformacion.Rows.Add(fila);
-                }
-                dgvInformacion.ResumeLayout(); //actualiza una sola vez
+                        for (int j = 1; j < dt.Columns.Count + 1; j++)
+                        {
+                            row[j - 1] = worksheet.Cells[i, j].Text;
+                        }
+                        dt.Rows.Add(row);
+                    }
 
-                txtAfiliados.Text = filas.Count.ToString();
+                    cbMunicipio.Invoke((MethodInvoker)delegate
+                    {
+                        cbMunicipio.DataSource = municipios.ToList();
+                    });
 
-                //agregamos el estado (una vez)
-                if (!string.IsNullOrWhiteSpace(entidaduno))
-                {
-                    txtEstado.Text = entidaduno;
+                    dgvInformacion.Invoke((MethodInvoker)delegate
+                    {
+                        dgvInformacion.DataSource = null;
+                        dgvInformacion.Columns.Clear();
+                        dgvInformacion.AutoGenerateColumns = true;
+                        dgvInformacion.DataSource = dt;
+                        dgvInformacion.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    });
+
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        txtAfiliados.Text = afiliados.ToString();
+                        txtEstado.Text = dgvInformacion.Rows[0].Cells[1].Value.ToString();
+                    });
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error de carga: " + ex.Message);
+                MessageBox.Show("Error " + ex.Message, "Error al cargar el Excel");
             }
         }
-
         private void label5_Click(object sender, EventArgs e)
         {
 
