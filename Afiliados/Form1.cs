@@ -138,6 +138,7 @@ namespace Afiliados
             dtpfin.Enabled = chbFecha.Checked;
             lblFechaInicio.Enabled = chbFecha.Checked;
             lblFechaFin.Enabled = chbFecha.Checked;
+            btnBuscar.Enabled = chbFecha.Checked;
         }
 
         private void cbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
@@ -171,11 +172,27 @@ namespace Afiliados
             txtArchivo.Text = string.Empty;
             txtAfiliados.Text = string.Empty;
             chbFecha.Checked = false;
+            dtpInicio.Value = DateTime.Now;
+            dtpfin.Value = DateTime.Now;
             municipios.Clear();
             cbMunicipio.DataSource = municipios.ToList();
             cbMunicipio.Text = string.Empty;
             
             dt.Clear();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            DateTime fInicio = dtpInicio.Value.Date;
+            DateTime ffin = dtpfin.Value.Date;
+            DataView dv = new DataView(dt);
+
+            string inicio = fInicio.ToString("MM/dd/yyyy");
+            string fin = ffin.ToString("MM/dd/yyyy");
+            dv.RowFilter = $"CONVERT([Fecha de afiliacion], 'System.DateTime') >= #{inicio}# AND CONVERT([Fecha de afiliacion], 'System.DateTime') <= #{fin}#";
+
+            dgvInformacion.DataSource= dv;
+            txtAfiliados.Text = dgvInformacion.Rows.Count.ToString();
         }
     }
 }

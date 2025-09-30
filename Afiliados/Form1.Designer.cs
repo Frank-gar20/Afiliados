@@ -55,6 +55,7 @@
             this.chbFecha = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtArchivo = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInformacion)).BeginInit();
             this.SuspendLayout();
@@ -288,11 +289,24 @@
             this.txtArchivo.Size = new System.Drawing.Size(160, 22);
             this.txtArchivo.TabIndex = 14;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Enabled = false;
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.Location = new System.Drawing.Point(559, 461);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(87, 38);
+            this.btnBuscar.TabIndex = 15;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // FRMafiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 516);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtArchivo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chbFecha);
@@ -349,6 +363,7 @@
         private System.Windows.Forms.CheckBox chbFecha;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtArchivo;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
 
