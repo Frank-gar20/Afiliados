@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,6 +51,12 @@
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvInformacion = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Municipio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha_Afiliacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
             this.chbFecha = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,12 +64,8 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBusquedaAfi = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Municipio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha_Afiliacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pgCarga = new System.Windows.Forms.ProgressBar();
+            this.lblCarga = new System.Windows.Forms.Label();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInformacion)).BeginInit();
             this.SuspendLayout();
@@ -206,14 +208,14 @@
             // importarToolStripMenuItem
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.importarToolStripMenuItem.Text = "Importar";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // limpiarToolStripMenuItem
             // 
             this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
-            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.limpiarToolStripMenuItem.Text = "Limpiar";
             this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.reiniToolStripMenuItem_Click);
             // 
@@ -231,6 +233,55 @@
             this.dgvInformacion.Name = "dgvInformacion";
             this.dgvInformacion.Size = new System.Drawing.Size(746, 150);
             this.dgvInformacion.TabIndex = 11;
+            // 
+            // id
+            // 
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id.DefaultCellStyle = dataGridViewCellStyle13;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            // 
+            // Entidad
+            // 
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Entidad.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Entidad.HeaderText = "Entidad";
+            this.Entidad.Name = "Entidad";
+            // 
+            // Municipio
+            // 
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Municipio.DefaultCellStyle = dataGridViewCellStyle15;
+            this.Municipio.HeaderText = "Municipio";
+            this.Municipio.Name = "Municipio";
+            // 
+            // Nombre
+            // 
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 200;
+            // 
+            // Fecha_Afiliacion
+            // 
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fecha_Afiliacion.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Fecha_Afiliacion.HeaderText = "Fecha de Afiliacion";
+            this.Fecha_Afiliacion.Name = "Fecha_Afiliacion";
+            // 
+            // Estatus
+            // 
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Estatus.DefaultCellStyle = dataGridViewCellStyle18;
+            this.Estatus.HeaderText = "Estatus";
+            this.Estatus.Name = "Estatus";
             // 
             // ofdAbrir
             // 
@@ -300,60 +351,34 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "Busqueda ID:";
             // 
-            // id
+            // pgCarga
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.id.DefaultCellStyle = dataGridViewCellStyle1;
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
+            this.pgCarga.Location = new System.Drawing.Point(525, 315);
+            this.pgCarga.Name = "pgCarga";
+            this.pgCarga.Size = new System.Drawing.Size(208, 17);
+            this.pgCarga.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pgCarga.TabIndex = 18;
+            this.pgCarga.Visible = false;
             // 
-            // Entidad
+            // lblCarga
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Entidad.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Entidad.HeaderText = "Entidad";
-            this.Entidad.Name = "Entidad";
-            // 
-            // Municipio
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Municipio.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Municipio.HeaderText = "Municipio";
-            this.Municipio.Name = "Municipio";
-            // 
-            // Nombre
-            // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 200;
-            // 
-            // Fecha_Afiliacion
-            // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Fecha_Afiliacion.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Fecha_Afiliacion.HeaderText = "Fecha de Afiliacion";
-            this.Fecha_Afiliacion.Name = "Fecha_Afiliacion";
-            // 
-            // Estatus
-            // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Estatus.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Estatus.HeaderText = "Estatus";
-            this.Estatus.Name = "Estatus";
+            this.lblCarga.AutoSize = true;
+            this.lblCarga.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCarga.Location = new System.Drawing.Point(423, 312);
+            this.lblCarga.Name = "lblCarga";
+            this.lblCarga.Size = new System.Drawing.Size(93, 24);
+            this.lblCarga.TabIndex = 19;
+            this.lblCarga.Text = "Cargando";
+            this.lblCarga.Visible = false;
             // 
             // FRMafiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(745, 516);
+            this.Controls.Add(this.lblCarga);
+            this.Controls.Add(this.pgCarga);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtBusquedaAfi);
             this.Controls.Add(this.btnBuscar);
@@ -416,6 +441,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Afiliacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
+        private System.Windows.Forms.ProgressBar pgCarga;
+        private System.Windows.Forms.Label lblCarga;
     }
 }
 

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Afiliados
 {
@@ -63,72 +64,79 @@ namespace Afiliados
             }
         }
 
-        private void CargarExcel(String path)
+        private async void CargarExcel(string path)
         {
             afiliados = 1;
             ExcelPackage.License.SetNonCommercialPersonal("Francisco Garcia");
+
             try
             {
-                using (var package = new ExcelPackage(new System.IO.FileInfo(path)))
+                DataTable tempT = dt.Clone(); //copia de la estructura de dt
+                HashSet<string> tempM = new HashSet<string>(); //hashset temporal para carga de 2do P
+
+                lblCarga.Visible = true;
+                pgCarga.Visible = true;
+
+                //Usamos hilo
+                await Task.Run(() =>
                 {
-                    if (package.Workbook.Worksheets.Count == 0)
+                    using (var package = new ExcelPackage(new System.IO.FileInfo(path)))
                     {
-                        MessageBox.Show("El archivo de Excel no contiene hojas de trabajo.");
-                        return;//por si no hay hojas
-                    }
-
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-
-                    int rowCount = 0;
-                    for (int i = 2; i < worksheet.Dimension.End.Row; i++)
-                    {
-                        rowCount++;
-                        afiliados++;
-                    }
-                    rowCount = rowCount + 3;
-                    for (int i = 2; i < rowCount; i++)
-                    {
-                        DataRow row = dt.NewRow();
-                        municipios.Add("TODOS");
-                        string m = worksheet.Cells[i, 3].Text;
-                        if (!string.IsNullOrEmpty(m))
+                        if (package.Workbook.Worksheets.Count == 0)
                         {
-                            municipios.Add(m);
-                        }
-                        else
-                        {
-                            municipios.Add("NINGUNO");
+                            throw new Exception("El archivo de Excel no contiene hojas de trabajo.");
                         }
 
-                        for (int j = 1; j < dt.Columns.Count + 1; j++)
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+                        int rowCount = 0;
+                        for (int i = 2; i < worksheet.Dimension.End.Row; i++)
                         {
-                            row[j - 1] = worksheet.Cells[i, j].Text;
+                            rowCount++;
+                            afiliados++;
                         }
-                        dt.Rows.Add(row);
+
+                        rowCount = rowCount + 3;
+
+                        for (int i = 2; i < rowCount; i++)
+                        {
+                            DataRow row = tempT.NewRow();
+                            tempM.Add("TODOS");
+
+                            string muni = worksheet.Cells[i, 3].Text;
+                            if (!string.IsNullOrEmpty(muni))
+                                tempM.Add(muni);
+                            else
+                                tempM.Add("NINGUNO");
+
+                            for (int j = 1; j < tempT.Columns.Count + 1; j++)
+                            {
+                                row[j - 1] = worksheet.Cells[i, j].Text;
+                            }
+
+                            tempT.Rows.Add(row);
+                        }
                     }
+                });
 
-                    cbMunicipio.Invoke((MethodInvoker)delegate
-                    {
-                        cbMunicipio.DataSource = municipios.ToList();
-                    });
+                //actualizamos UI
+                municipios = tempM;
+                dt = tempT;
 
-                    dgvInformacion.Invoke((MethodInvoker)delegate
-                    {
-                        dgvInformacion.DataSource = null;
-                        dgvInformacion.Columns.Clear();
-                        dgvInformacion.AutoGenerateColumns = true;
-                        dgvInformacion.DataSource = dt;
-                        dgvInformacion.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    });
+                cbMunicipio.DataSource = municipios.ToList();
 
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        txtAfiliados.Text = afiliados.ToString();
-                        txtEstado.Text = dgvInformacion.Rows[0].Cells[1].Value.ToString();
-                        txtArchivo.Text = ofdAbrir.SafeFileName;
-                    });
-                    txtBusquedaAfi.ReadOnly = false;
-                }
+                dgvInformacion.DataSource = null;
+                dgvInformacion.Columns.Clear();
+                dgvInformacion.AutoGenerateColumns = true;
+                dgvInformacion.DataSource = dt;
+                dgvInformacion.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                txtAfiliados.Text = afiliados.ToString();
+                txtEstado.Text = dgvInformacion.Rows[0].Cells[1].Value.ToString();
+                txtArchivo.Text = ofdAbrir.SafeFileName;
+                txtBusquedaAfi.ReadOnly = false;
+                pgCarga.Visible = false;
+                lblCarga.Visible = false;
             }
             catch (Exception ex)
             {
